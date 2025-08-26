@@ -1,7 +1,7 @@
 
-  # Team Directory SPA (Copy)
+  # Advanced Blog Platform
 
-  This is a code bundle for Team Directory SPA (Copy). The original project is available at https://www.figma.com/design/3qcVMzxyik403a0AKTUCNu/Team-Directory-SPA--Copy-.
+  This is a code bundle for Advanced Blog Platform. The original project is available at https://www.figma.com/design/SR1Re57B3AO484g63kR9Qj/Advanced-Blog-Platform.
 
   ## Running the code
 
