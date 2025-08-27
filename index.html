@@ -4,11 +4,188 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ephesians Blog</title>
-    <script type="module" crossorigin src="/assets/index-Bbp2C7Im.js"></script>
+    <style>
+      /* General body styling for context */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #0d1a26; /* Dark ocean background for the main page */
+        color: #e0f2f7;
+      }
+
+      /* Modal overlay */
+      .modal-container {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.7
+        ); /* Darker, slightly transparent overlay */
+        backdrop-filter: blur(8px); /* More blur for a deeper ocean feel */
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out; /* Slower transition */
+      }
+
+      /* Modal content box */
+      .modal-content {
+        background: linear-gradient(
+          135deg,
+          #0a2a4a,
+          #1e4a7a
+        ); /* Dark blue ocean gradient */
+        padding: 40px;
+        border-radius: 15px; /* Softer rounded corners */
+        max-width: 550px; /* Slightly wider for more content */
+        width: 90%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* More prominent shadow */
+        position: relative;
+        text-align: center;
+        color: #e0f2f7; /* Light text for dark background */
+        transform: translateY(-20px) scale(0.9); /* Slight lift and scale for entrance */
+        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+          opacity 0.5s ease-in-out; /* Springy entrance */
+        border: 1px solid rgba(70, 130, 180, 0.4); /* Subtle ocean-blue border */
+        display: block; /* Ensures the anchor tag fills the content box */
+        text-decoration: none; /* Removes the default link underline */
+      }
+      /* Hover effect for the entire modal content */
+      .modal-content:hover {
+        transform: translateY(-22px) scale(1.02); /* Slight lift on hover */
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6); /* More prominent shadow on hover */
+      }
+
+      .modal-container.show {
+        display: flex;
+        opacity: 1;
+      }
+
+      .modal-container.show .modal-content {
+        transform: translateY(0) scale(1);
+      }
+
+      /* Close button styling */
+      .close-button {
+        color: #a7d9f2; /* Lighter blue for visibility */
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 32px; /* Larger close button */
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        z-index: 1001; /* Ensure close button is above the anchor tag */
+      }
+
+      .close-button:hover,
+      .close-button:focus {
+        color: #ffffff; /* White on hover */
+        transform: rotate(90deg); /* Playful rotation */
+      }
+
+      /* Header styling */
+      .modal-content h2 {
+        font-family: "Montserrat", sans-serif; /* More modern font */
+        color: #79cffc; /* Bright ocean blue for emphasis */
+        margin-top: 0;
+        font-size: 3rem; /* Larger, more impactful heading */
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Soft text shadow */
+        margin-bottom: 15px;
+      }
+
+      /* Paragraph styling */
+      .modal-content p {
+        font-family: "Open Sans", sans-serif; /* Readable body font */
+        color: #b3e0ff; /* Lighter blue for body text */
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 25px;
+      }
+
+      /* Image styling - Adjusted for aspect ratio */
+      .team-image {
+        width: 100%; /* Take full width of its container */
+        max-width: 450px; /* Max width to keep it from being too large */
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 10px;
+        margin-top: 20px;
+        border: 2px solid rgba(121, 207, 252, 0.6);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/assets/index-CAdvstDc.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-BN6ZtjlL.css">
   </head>
 
   <body>
     <div id="root"></div>
+
+    <div id="team-modal" class="modal-container">
+      <a
+        href="https://team.ephesians.live"
+        target="_blank"
+        class="modal-content"
+      >
+        <span class="close-button">&times;</span>
+        <h2>Meet the Crew!</h2>
+        <p>Click here to learn more about the team behind Ephesians Blog.</p>
+        <img src="/ad.jpg" alt="Ephesians Blog Team" class="team-image" />
+      </a>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.getElementById("team-modal");
+        const closeBtn = document.querySelector(".close-button");
+
+        // Function to show the modal
+        const showModal = () => {
+          modal.classList.add("show");
+        };
+
+        // Function to hide the modal
+        const hideModal = (event) => {
+          // Prevent the click from propagating to the anchor tag
+          if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          modal.classList.remove("show");
+        };
+
+        // Show the modal after 5 seconds (5000 milliseconds)
+        setTimeout(showModal, 5000);
+
+        // Close the modal when the close button is clicked
+        closeBtn.addEventListener("click", hideModal);
+
+        // Close the modal when the user clicks outside of it
+        window.addEventListener("click", (event) => {
+          if (event.target === modal) {
+            hideModal();
+          }
+        });
+
+        // Close the modal if the Escape key is pressed
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            hideModal();
+          }
+        });
+      });
+    </script>
   </body>
 </html>
